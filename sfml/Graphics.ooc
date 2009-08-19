@@ -14,7 +14,7 @@ Window: cover from sfWindow*
 
 RenderWindow: cover from sfRenderWindow* {
 	
-    new: func(mode: VideoMode, title: String, style: UInt, params: WindowSettings) -> This {
+    new: func (mode: VideoMode, title: String, style: UInt, params: WindowSettings) -> This {
         sfRenderWindow_Create(
                     mode,
                     title,
@@ -38,6 +38,10 @@ RenderWindow: cover from sfRenderWindow* {
     display: func {
         sfWindow_Display(this as Window)
     }
+
+    getEvent: func (eventReceived: Event*) -> Bool {
+        return sfWindow_GetEvent(this as Window, eventReceived)
+    }
 }
 
 sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
@@ -45,3 +49,4 @@ sfWindow_IsOpened: extern func (Window)
 sfWindow_Display: extern func (Window)
 sfWindow_Destroy: extern func (Window)
 sfWindow_Close: extern func (Window)
+sfWindow_GetEvent: extern func (Window, Event)
