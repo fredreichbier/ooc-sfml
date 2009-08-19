@@ -10,7 +10,7 @@ Style: class {
     NONE = 0, TITLEBAR = 1, RESIZE = 2, CLOSE = 4, FULLSCREEN = 8 : const static UInt
 }
 
-RenderWindow: cover from sfRenderWindow {
+RenderWindow: cover from sfRenderWindow* {
 	
     new: func(mode: VideoMode, title: String, style: UInt, params: WindowSettings) -> This {
         sfRenderWindow_Create(
