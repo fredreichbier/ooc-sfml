@@ -1,53 +1,51 @@
 include SFML/Window;
 
-use csfml-window;
+//use csfml-window;
 
-ctype sfVideoMode;
-typedef sfVideoMode SfVideoMode;
+sfVideoMode: extern sfVideoMode;
 
-class VideoMode {
-    SfVideoMode videoMode;
-
-    func new(=videoMode);
-
-    func new(UInt Width, UInt Height, UInt BitsPerPixel) {
-        this.videoMode.Width = Width;
-        this.videoMode.Height = Height;
-        this.videoMode.BitsPerPixel = BitsPerPixel;
+VideoMode: cover from sfVideoMode {
+    new: func(Width, Height, BitsPerPixel: UInt) -> This{
+        mode: VideoMode
+        mode Width = Width;
+        mode Height = Height;
+        mode BitsPerPixel = BitsPerPixel;
+        mode
     }
 
-    func new(UInt Width, UInt Height) {
-        this.videoMode.Width = Width;
-        this.videoMode.Height = Height;
-        this.videoMode.BitsPerPixel = 32;
+    new: func(Width, Height: UInt) -> This{
+        mode: VideoMode
+        mode Width = Width;
+        mode Height = Height;
+        mode BitsPerPixel = 32;
+        mode
     }
 
-    static func getDesktopMode -> VideoMode {
+    getDesktopMode: static func -> VideoMode {
         return new VideoMode(sfVideoMode_GetDesktopMode());
     }
 
-    static func getMode(Size size) -> VideoMode {
+    getMode: static func(size: SizeT) -> VideoMode {
         return new VideoMode(sfVideoMode_GetMode(size));
     }
 
-    static func getModesCount -> Size {
+    getModesCount: static func -> Size {
         return sfVideoMode_GetModesCount();
     }
 }
 
-ctype sfWindowSettings;
-typedef sfWindowSettings SfWindowSettings;
+sfWindowSettings: extern sfWindowSettings;
 
-class WindowSettings {
-    SfWindowSettings windowSettings;
-
-    func new(UInt depthBits, UInt stencilBits, UInt antialiasingLevel) {
-        this.windowSettings.DepthBits = depthBits;
-        this.windowSettings.StencilBits = stencilBits;
-        this.windowSettings.AntialiasingLevel = antialiasingLevel;
+WindowSettings: cover from sfWindowSettings {
+    new: func(depthBits, stencilBits, antialiasingLevel: ULong) -> This {
+        settings: WindowSettings
+        settings DepthBits = depthBits;
+        settings StencilBits = stencilBits;
+        settings AntialiasingLevel = antialiasingLevel;
+        settings
     }
 
-    func new {
+    new: func -> This {
         this(24, 8, 0);
     }
 }

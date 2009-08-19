@@ -1,47 +1,43 @@
 include SFML/Graphics;
 
-use csfml-graphics;
+//use csfml-graphics;
 
 import sfml.Windows;
 
-ctype sfRenderWindow;
-typedef sfRenderWindow SfRenderWindow;
+sfRenderWindow: extern sfRenderWindow
+ULong: cover from unsigned long
 
-typedef unsigned long ULong;
+Style: class {
+    NONE: const static UInt = 0;
+    TITLEBAR: const static UInt = 1;
+    RESIZE: const static UInt = 2;
+    CLOSE: const static UInt = 4;
+    FULLSCREEN: const static UInt = 8;
+}
 
-class RenderWindow {
-    SfRenderWindow* window;
-
-    const static UInt NONE = 0;
-    const static UInt TITLEBAR = 1;
-    const static UInt RESIZE = 2;
-    const static UInt CLOSE = 4;
-    const static UInt FULLSCREEN = 8;
-
-    func new(VideoMode Mode, String title, ULong style, WindowSettings Params) {
-        this.window = sfRenderWindow_Create(
-                        Mode.videoMode,
-                        title,
-                        style,
-                        Params.windowSettings
-                        );
+RenderWindow: cover from sfRenderWindow {
+    new: func(Mode: videoMode, title: String, style: ULong, Params: windowSettings) -> This {
+        sfRenderWindow_Create(
+                    Mode videoMode,
+                    title,
+                    style,
+                    ParamsSettings
+                    );
     }
 
-    /* TODO: wrap sfRenderWindow_CreateFromHandle */
-
-    func destroy {
-        sfWindow_Destroy(this.window);
+    destroy: func {
+        sfWindow_Destroy(this);
     }
 
-    func close {
-        sfWindow_Close(this.window);
+    close: func {
+        sfWindow_Close(this);
     }
 
-    func isOpened -> Bool {
-        return sfWindow_IsOpened(this.window);
+    isOpened: func -> Bool {
+        return sfWindow_IsOpened(this);
     }
     
-    func display {
-        sfWindow_Display(this.window);
+    display: func {
+        sfWindow_Display(this);
     }
 }
