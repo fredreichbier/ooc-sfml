@@ -1,43 +1,45 @@
-include SFML/Graphics;
+include SFML/Graphics
 
-//use csfml-graphics;
+//use csfml-graphics
 
-import sfml.Windows;
+import sfml.Windows
 
-sfRenderWindow: extern sfRenderWindow
-ULong: cover from unsigned long
+//sfRenderWindow: extern sfRenderWindow
 
 Style: class {
-    NONE: const static UInt = 0;
-    TITLEBAR: const static UInt = 1;
-    RESIZE: const static UInt = 2;
-    CLOSE: const static UInt = 4;
-    FULLSCREEN: const static UInt = 8;
+    NONE = 0, TITLEBAR = 1, RESIZE = 2, CLOSE = 4, FULLSCREEN = 8 : const static UInt
 }
 
 RenderWindow: cover from sfRenderWindow {
-    new: func(Mode: videoMode, title: String, style: ULong, Params: windowSettings) -> This {
+	
+    new: func(mode: VideoMode, title: String, style: UInt, params: WindowSettings) -> This {
         sfRenderWindow_Create(
-                    Mode videoMode,
+                    mode,
                     title,
                     style,
-                    ParamsSettings
-                    );
+                    params
+                    )
     }
 
     destroy: func {
-        sfWindow_Destroy(this);
+        sfWindow_Destroy(this)
     }
 
     close: func {
-        sfWindow_Close(this);
+        sfWindow_Close(this)
     }
 
     isOpened: func -> Bool {
-        return sfWindow_IsOpened(this);
+        return sfWindow_IsOpened(this)
     }
     
     display: func {
-        sfWindow_Display(this);
+        sfWindow_Display(this)
     }
 }
+
+sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
+sfWindow_IsOpened: extern func (RenderWindow)
+sfWindow_Display: extern func (RenderWindow)
+sfWindow_Destroy: extern func (RenderWindow)
+sfWindow_Close: extern func (RenderWindow)

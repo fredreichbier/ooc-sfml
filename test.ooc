@@ -1,12 +1,12 @@
-import sfml.Graphics;
+import sfml.Graphics, sfml.Windows
 
 main: func -> Int{
-    mode := new VideoMode(600, 480, 32);
-    window = new Window(mode, "Hello World!", RenderWindow TITLEBAR, new WindowSettings);
+    mode := new VideoMode(600, 480, 32)
+    window := new RenderWindow(mode, "Hello World!", Style TITLEBAR, new WindowSettings)
 
-    running := true;
+    running := true
     while(running) {
-        window display();
+        window display()
     }
-    return 0;
+    return 0
 }
