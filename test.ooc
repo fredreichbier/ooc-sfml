@@ -7,7 +7,7 @@ main: func -> Int{
 
     while(app isOpened()) {
         evt: Event
-        while(app getEvent(evt@)) {
+        while(app getEvent(evt&)) {
             if(evt Type == EventType closed) {
                 app close()
             }

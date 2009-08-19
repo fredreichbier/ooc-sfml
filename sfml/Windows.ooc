@@ -53,10 +53,12 @@ WindowSettings: cover from sfWindowSettings {
     }
 }
 
-Event: cover from union sfEvent
-/* "we don't need no con-struc-atioooooon" */
+Event: cover from sfEvent {
+    Type: extern Int
+}
 
 JoyButtonEvent: cover from struct sfJoyButtonEvent {
+    Type: extern Int
     JoystickId: extern UInt
     Button: extern UInt
 }
@@ -65,6 +67,7 @@ JoyAxis: cover from sfJoyAxis
 /* TODO */
 
 JoyMoveEvent: cover from struct sfJoyMoveEvent {
+    Type: extern Int
     JoystickId: extern UInt
     Axis: extern JoyAxis
     Position: extern Float
@@ -74,6 +77,7 @@ KeyCode: cover from sfKeyCode
 /* TODO */
 
 KeyEvent: cover from struct sfKeyEvent {
+    Type: extern Int
     Code: extern KeyCode
     Alt, Control, Shift: extern Bool
 }
@@ -82,25 +86,30 @@ MouseButton: cover from sfMouseButton
 /* TODO */
 
 MouseButtonEvent: cover from struct sfMouseButtonEvent {
+    Type: extern Int
     Button: extern MouseButton
     X, Y: extern Int
 }
 
 MouseMoveEvent: cover from struct sfMouseMoveEvent {
+    Type: extern Int
     X, Y: extern Int
 }
 
 MouseWheelEvent: cover from struct sfMouseWheelEvent {
+    Type: extern Int
     Delta: extern Int
 }
 
 SizeEvent: cover from struct sfSizeEvent {
+    Type: extern Int
     Width, Height: extern UInt
 }
 
 UInt32: cover from sfUint32
 
 TextEvent: cover from struct sfTextEvent {
+    Type: extern Int
     Unicode: extern UInt32
 }
 
