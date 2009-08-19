@@ -10,6 +10,8 @@ Style: class {
     NONE = 0, TITLEBAR = 1, RESIZE = 2, CLOSE = 4, FULLSCREEN = 8 : const static UInt
 }
 
+Window: cover from sfWindow*
+
 RenderWindow: cover from sfRenderWindow* {
 	
     new: func(mode: VideoMode, title: String, style: UInt, params: WindowSettings) -> This {
@@ -22,24 +24,24 @@ RenderWindow: cover from sfRenderWindow* {
     }
 
     destroy: func {
-        sfWindow_Destroy(this)
+        sfWindow_Destroy(this as Window)
     }
 
     close: func {
-        sfWindow_Close(this)
+        sfWindow_Close(this as Window)
     }
 
     isOpened: func -> Bool {
-        return sfWindow_IsOpened(this)
+        return sfWindow_IsOpened(this as Window)
     }
     
     display: func {
-        sfWindow_Display(this)
+        sfWindow_Display(this as Window)
     }
 }
 
 sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
-sfWindow_IsOpened: extern func (RenderWindow)
-sfWindow_Display: extern func (RenderWindow)
-sfWindow_Destroy: extern func (RenderWindow)
-sfWindow_Close: extern func (RenderWindow)
+sfWindow_IsOpened: extern func (Window)
+sfWindow_Display: extern func (Window)
+sfWindow_Destroy: extern func (Window)
+sfWindow_Close: extern func (Window)
