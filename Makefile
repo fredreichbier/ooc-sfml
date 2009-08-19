@@ -1,2 +1,2 @@
 all:
-	o3c test.ooc -lcsfml-window -lcsfml-graphics
+	ooc test.ooc -lcsfml-window -lcsfml-graphics
