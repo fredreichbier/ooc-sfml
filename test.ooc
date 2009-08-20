@@ -1,7 +1,7 @@
 import sfml.Graphics, sfml.Windows
 
-//include unistd | _BSD_SOURCE
-include unistd
+include unistd | (__USE_BSD)
+//include unistd
 usleep: extern func(Int)
 
 main: func -> Int{
