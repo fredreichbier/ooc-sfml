@@ -1,0 +1,9 @@
+#Here's a comment
+
+= All
+Name: CSFML Graphics
+Description: Simple and Fast Multimedia Library, C bindings
+Requires: 
+Version: 1.5
+Libs: -lcsfml-graphics
+#Pkgs: csfml-graphics

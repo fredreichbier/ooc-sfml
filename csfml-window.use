@@ -1,0 +1,6 @@
+= All
+Name: CSFML Window
+Description: Simple and Fast Multimedia Library, C bindings
+Requires: 
+Version: 1.5
+Libs: -lcsfml-window
