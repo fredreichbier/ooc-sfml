@@ -44,6 +44,10 @@ RenderWindow: cover from sfRenderWindow* {
     getEvent: func (eventReceived: Event*) -> Bool {
         return sfWindow_GetEvent(this as Window, eventReceived)
     }
+
+    draw: func ~sprite (sprite: Sprite) {
+        sfRenderWindow_DrawSprite(this, sprite)
+    }
 }
 
 UInt8: cover from sfUint8
@@ -89,14 +93,67 @@ Color: cover from sfColor {
 	}
 }
 
+Image: cover from sfImage* {
+    new: func ~from_color (width, height: UInt, color: Color@) {
+        sfImage_CreateFromColor(width, height, color)
+    }
+
+    new: func ~from_pixels (width, height: UInt, data: UInt8*) {
+        sfImage_CreateFromPixels(width, height, data)
+    }
+
+    new: func ~from_file (filename: String) {
+        sfImage_CreateFromFile(filename)
+    }
+
+    new: func ~from_memory (data: String, sizeInBytes: SizeT) {
+        sfImage_CreateFromMemory(data, sizeInBytes)
+    }
+
+    destroy: func {
+        sfImage_Destroy(this)
+    }
+}
+
+Sprite: cover from sfSprite* {
+    new: func {
+        sfSprite_Create()
+    }
+
+    new: func ~from_image (image: Image) {
+        this := this()
+        this setImage(image)
+        this
+    }
+
+    destroy: func {
+        sfSprite_Destroy(this)
+    }
+
+    setImage: func (image: Image) {
+        sfSprite_SetImage(this, image)
+    }
+}
+
 sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
 sfWindow_IsOpened: extern func (Window)
 sfWindow_Display: extern func (Window)
 sfWindow_Destroy: extern func (Window)
 sfWindow_Close: extern func (Window)
 sfRenderWindow_Clear: extern func (Window, Color)
+sfRenderWindow_DrawSprite: extern func (Window, Sprite)
 sfWindow_GetEvent: extern func (Window, Event)
 
 sfColor_Add: extern func(Color, Color)
 sfColor_Modulate: extern func(Color, Color)
 sfColor_fromRGB: extern func(UInt8, UInt8, UInt8)
+
+sfImage_CreateFromColor: extern func (UInt, UInt, Color)
+sfImage_CreateFromPixels: extern func (UInt, UInt, UInt8)
+sfImage_CreateFromFile: extern func (String)
+sfImage_CreateFromMemory: extern func (String, SizeT)
+sfImage_Destroy: extern func (Image)
+
+sfSprite_Create: extern func()
+sfSprite_Destroy: extern func(Sprite)
+sfSprite_SetImage: extern func(Sprite, Image)

@@ -7,9 +7,9 @@ usleep: extern func(Int)
 main: func -> Int{
     mode := new VideoMode(600, 480, 32)
     app := new RenderWindow(mode, "Hello World!", Style TITLEBAR, new WindowSettings)
-
-	//Colors magenta print()
-
+    image := new Image("cool_sprite.png")
+    sprite := new Sprite(image)
+    
     while(app isOpened()) {
         evt: Event
         while(app getEvent(evt&)) {
@@ -17,7 +17,7 @@ main: func -> Int{
                 app close()
             }
         }
-        app clear(Colors niceBlue)
+        app draw(sprite)
 		app display()
 		usleep(20_000)
     }
