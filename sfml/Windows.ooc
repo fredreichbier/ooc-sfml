@@ -4,17 +4,19 @@ include SFML/Window
 
 VideoMode: cover from sfVideoMode {
 	
-	Width, Height, BitsPerPixel: extern Int
+	width: extern(Width) UInt
+	height: extern(Height) UInt
+	bitsPerPixel: extern(BitsPerPixel) UInt
 	
-    new: func ~with_bpp (width, height, bitsPerPixel: UInt) -> This {
+    new: func ~with_bpp (.width, .height, .bitsPerPixel) -> This {
         mode: VideoMode
-        mode Width = width
-        mode Height = height
-        mode BitsPerPixel = bitsPerPixel
-        mode
+        mode width = width
+        mode height = height
+        mode bitsPerPixel = bitsPerPixel
+        return mode
     }
 
-    new: func (width, height: UInt) -> This {
+    new: func (.width, .height) -> This {
         this(width, height, 32)
     }
 
@@ -38,13 +40,15 @@ sfVideoMode_GetMode: extern func (SizeT) -> VideoMode
 
 WindowSettings: cover from sfWindowSettings {
 	
-	DepthBits, StencilBits, AntialiasingLevel: extern ULong
+	depthBits : extern(DepthBits) ULong
+	stencilBits : extern(StencilBits) ULong
+	antialiasingLevel : extern(AntialiasingLevel) ULong
 	
-    new: func (depthBits, stencilBits, antialiasingLevel: ULong) -> This {
+    new: func (.depthBits, .stencilBits, .antialiasingLevel) -> This {
         settings: WindowSettings
-        settings DepthBits = depthBits
-        settings StencilBits = stencilBits
-        settings AntialiasingLevel = antialiasingLevel
+        settings depthBits = depthBits
+        settings stencilBits = stencilBits
+        settings antialiasingLevel = antialiasingLevel
         settings
     }
 
@@ -54,80 +58,85 @@ WindowSettings: cover from sfWindowSettings {
 }
 
 Event: cover from sfEvent {
-    Type: extern Int
+    type: extern(Type) Int
 }
 
 JoyButtonEvent: cover from struct sfJoyButtonEvent {
-    Type: extern Int
-    JoystickId: extern UInt
-    Button: extern UInt
+    type: extern(Type) Int
+	joystickId: extern(JoystickId) UInt
+	button: extern(Button) UInt
 }
 
 JoyAxis: cover from sfJoyAxis
 /* TODO */
 
 JoyMoveEvent: cover from struct sfJoyMoveEvent {
-    Type: extern Int
-    JoystickId: extern UInt
-    Axis: extern JoyAxis
-    Position: extern Float
+    type: extern(Type) Int
+	joystickId: extern(JoystickId) UInt
+	axis: extern(Axis) JoyAxis
+	position: extern(Position) Float
 }
 
 KeyCode: cover from sfKeyCode
 /* TODO */
 
 KeyEvent: cover from struct sfKeyEvent {
-    Type: extern Int
-    Code: extern KeyCode
-    Alt, Control, Shift: extern Bool
+    type: extern(Type) Int
+    code: extern(Code) KeyCode
+	alt: extern(Alt) Bool
+	control: extern(Control) Bool
+	shift: extern(Shift) Bool
 }
 
 MouseButton: cover from sfMouseButton
 /* TODO */
 
 MouseButtonEvent: cover from struct sfMouseButtonEvent {
-    Type: extern Int
-    Button: extern MouseButton
-    X, Y: extern Int
+    type: extern(Type) Int
+    button: extern(Button) MouseButton
+    x: extern(X) Int
+	y: extern(Y) Int
 }
 
 MouseMoveEvent: cover from struct sfMouseMoveEvent {
-    Type: extern Int
-    X, Y: extern Int
+    type: extern(Type) Int
+	x: extern(X) Int
+	y: extern(Y) Int
 }
 
 MouseWheelEvent: cover from struct sfMouseWheelEvent {
-    Type: extern Int
-    Delta: extern Int
+    type: extern(Type) Int
+    delta: extern(Delta) Int
 }
 
 SizeEvent: cover from struct sfSizeEvent {
-    Type: extern Int
-    Width, Height: extern UInt
+    type: extern(Type) Int
+	width: extern(Width) UInt
+	height: extern(Height) UInt
 }
 
 UInt32: cover from sfUint32
 
 TextEvent: cover from struct sfTextEvent {
-    Type: extern Int
-    Unicode: extern UInt32
+    type: extern(Type) Int
+    unicode: extern(Unicode) UInt32
 }
 
 EventType: class {
-    closed: const static Int = 0
-    resized: const static Int = 1
-    lostFocus: const static Int = 2
-    gainedFocus: const static Int = 3
-    textEntered: const static Int = 4
-    keyPressed: const static Int = 5
-    keyReleased: const static Int = 6
-    mouseWheelMoved: const static Int = 7
-    mouseButtonPressed: const static Int = 8
-    mouseButtonReleased: const static Int = 9
-    mouseMoved: const static Int = 10 
-    mouseEntered: const static Int = 11
-    mouseLeft: const static Int = 12
-    joyButtonPressed: const static Int = 13
-    joyButtonReleased: const static Int = 14
-    joyMoved: const static Int = 15
+    closed = 0,
+    resized = 1,
+	lostFocus = 2,
+	gainedFocus = 3,
+	textEntered = 4,
+    keyPressed = 5,
+	keyReleased = 6,
+    mouseWheelMoved = 7,
+	mouseButtonPressed = 8,
+    mouseButtonReleased = 9,
+	mouseMoved = 10,
+    mouseEntered = 11,
+    mouseLeft = 12,
+    joyButtonPressed = 13,
+    joyButtonReleased = 14,
+    joyMoved = 15 : const static Int
 }
