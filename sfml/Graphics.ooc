@@ -4,8 +4,6 @@ include SFML/Graphics
 
 import sfml.Windows
 
-//sfRenderWindow: extern sfRenderWindow
-
 Style: class {
     NONE = 0, TITLEBAR = 1, RESIZE = 2, CLOSE = 4, FULLSCREEN = 8 : const static UInt
 }
@@ -51,25 +49,26 @@ RenderWindow: cover from sfRenderWindow* {
 UInt8: cover from sfUint8
 
 Colors: class {
-/*    black : static const Color = Color fromRGB(0, 0, 0)
-    white : static const Color = Color fromRGB(255, 255, 255)
-    red : static const Color = Color fromRGB(255, 0, 0)
-    green : static const Color = Color fromRGB(0, 255, 0)
-    blue : static const Color = Color fromRGB(0, 0, 255)
-    yellow : static const Color = Color fromRGB(255, 255, 0)
-    magenta : static const Color = Color fromRGB(255, 0, 255)
-    cyan : static const Color = Color fromRGB(0, 255, 255) */
+    black = Color fromRGB(0, 0, 0),
+    white = Color fromRGB(255, 255, 255),
+    red = Color fromRGB(255, 0, 0),
+    green = Color fromRGB(0, 255, 0),
+    blue = Color fromRGB(0, 0, 255),
+    yellow = Color fromRGB(255, 255, 0),
+    magenta = Color fromRGB(255, 0, 255),
+    cyan = Color fromRGB(0, 255, 255),
+	niceBlue = Color fromRGB(5, 162, 202) : static const Color
 }
 
 Color: cover from sfColor {
     r, g, b, a: extern UInt8
 
     fromRGB: static func (r, g, b: UInt8) -> Color {
-        return fromRGBA(r, g, b, 255 as UInt8)
+        return This fromRGBA(r, g, b, 255 as UInt8)
     }
 
     fromRGBA: static func (r, g, b, a: UInt8) -> Color {
-        Color color
+        color: Color
         color r = r
         color g = g
         color b = b
@@ -78,12 +77,16 @@ Color: cover from sfColor {
     }
 
     add: func (b: Color) -> Color {
-        return SfColor_Add(this, b)
+        return sfColor_Add(this, b)
     }
 
     modulate: func (b: Color) -> Color {
-        return SfColor_Modulate(this, b);
+        return sfColor_Modulate(this, b);
     }
+	
+	print: func {
+		printf ("Color (%u, %u, %u, %u)\n", r, g, b, a)
+	}
 }
 
 sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)

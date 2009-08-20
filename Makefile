@@ -1,2 +1,2 @@
 all:
-	ooc test.ooc -lcsfml-window -lcsfml-graphics
+	ooc test.ooc -lcsfml-window -lcsfml-graphics -noclean
