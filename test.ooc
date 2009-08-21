@@ -1,25 +1,59 @@
 import sfml.Graphics, sfml.Windows
 
 include unistd | (__USE_BSD)
-
 usleep: extern func(Int)
 
-main: func -> Int{
+main: func {
     mode := new VideoMode(600, 470)
-    app := new RenderWindow(mode, "Hello World!", Style TITLEBAR, new WindowSettings)
-    image := new Image("cool_sprite.jpg")
+    win := new RenderWindow(mode, "Hello World!", Style TITLEBAR, new WindowSettings)
+    image := new Image("data/cool_sprite.jpg")
     sprite := new Sprite(image)
-    
-    while(app isOpened()) {
+    box := new BouncingBox(win)
+	
+    while(win isOpened()) {
         evt: Event
-        while(app getEvent(evt&)) {
+        while(win getEvent(evt&)) {
             if(evt type == EventType closed) {
-                app close()
+                win close()
             }
         }
-        app draw(sprite)
-		app display()
-		usleep(20_000)
+        win draw(sprite)
+		box update()
+		
+		win display()
+		usleep(10_000)
     }
-    return 0
+}
+
+BouncingBox: class {
+	
+	win: RenderWindow
+	velX := 1.5
+	velY := 1.5
+	sprite := new Sprite(new Image("data/cache.png"))
+	width := sprite getWidth()
+	height := sprite getHeight()
+	//halfWidth := sprite getWidth() / 2
+	//halfHeight := sprite getHeight() / 2
+	halfWidth := 75.0; halfHeight := 75.0
+	
+	new: func(=win) {
+		sprite move(-width / 4, -height / 4)
+	}
+	
+	update: func {
+		sprite move(velX, velY)
+		
+		x := sprite getX() + width / 2
+		y := sprite getY() + sprite getHeight() / 2
+		
+		if((x + halfWidth > win getWidth()) || (x - halfWidth < 0))
+			velX = -velX
+		
+		if((y + halfHeight > win getHeight()) || (y - halfHeight < 0))
+			velY = -velY
+			
+		win draw(sprite)
+	}
+	
 }

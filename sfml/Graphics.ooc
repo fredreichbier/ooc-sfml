@@ -1,6 +1,6 @@
 include SFML/Graphics
 
-//use csfml-graphics
+use csfml-graphics
 
 import sfml.Windows
 
@@ -48,6 +48,14 @@ RenderWindow: cover from sfRenderWindow* {
     draw: func ~sprite (sprite: Sprite) {
         sfRenderWindow_DrawSprite(this, sprite)
     }
+	
+	getWidth: func -> UInt {
+		sfRenderWindow_GetWidth(this)
+	}
+	
+	getHeight: func -> UInt {
+		sfRenderWindow_GetHeight(this)
+	}
 }
 
 UInt8: cover from sfUint8
@@ -133,6 +141,45 @@ Sprite: cover from sfSprite* {
     setImage: func (image: Image) {
         sfSprite_SetImage(this, image)
     }
+	
+	getSubRect: func -> IntRect {
+		sfSprite_GetSubRect(this)
+	}
+	
+	move: func (offsetX, offsetY: Float) {
+		sfSprite_Move(this, offsetX, offsetY)
+	}
+	
+	getX: func -> Float {
+		sfSprite_GetX(this)
+	}
+	
+	getY: func -> Float {
+		sfSprite_GetY(this)
+	}
+	
+	getCenterX: func -> Float {
+		sfSprite_GetCenterX(this)
+	}
+	
+	getCenterY: func -> Float {
+		sfSprite_GetCenterY(this)
+	}
+	
+	getWidth: func -> Float {
+		sfSprite_GetWidth(this)
+	}
+	
+	getHeight: func -> Float {
+		sfSprite_GetHeight(this)
+	}
+}
+
+IntRect: cover from sfIntRect {
+	left: extern(Left) Int
+	right: extern(Right) Int
+	top: extern(Top) Int
+	bottom: extern(Bottom) Int
 }
 
 sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
@@ -142,11 +189,13 @@ sfWindow_Destroy: extern func (Window)
 sfWindow_Close: extern func (Window)
 sfRenderWindow_Clear: extern func (Window, Color)
 sfRenderWindow_DrawSprite: extern func (Window, Sprite)
+sfRenderWindow_GetWidth: extern func (Window) -> UInt
+sfRenderWindow_GetHeight: extern func (Window) -> UInt
 sfWindow_GetEvent: extern func (Window, Event)
 
-sfColor_Add: extern func(Color, Color)
-sfColor_Modulate: extern func(Color, Color)
-sfColor_fromRGB: extern func(UInt8, UInt8, UInt8)
+sfColor_Add: extern func (Color, Color)
+sfColor_Modulate: extern func (Color, Color)
+sfColor_fromRGB: extern func (UInt8, UInt8, UInt8)
 
 sfImage_CreateFromColor: extern func (UInt, UInt, Color)
 sfImage_CreateFromPixels: extern func (UInt, UInt, UInt8)
@@ -154,6 +203,14 @@ sfImage_CreateFromFile: extern func (String)
 sfImage_CreateFromMemory: extern func (String, SizeT)
 sfImage_Destroy: extern func (Image)
 
-sfSprite_Create: extern func()
-sfSprite_Destroy: extern func(Sprite)
-sfSprite_SetImage: extern func(Sprite, Image)
+sfSprite_Create: extern func ()
+sfSprite_Destroy: extern func (Sprite)
+sfSprite_SetImage: extern func (Sprite, Image)
+sfSprite_GetSubRect: extern func (Sprite) -> IntRect
+sfSprite_Move: extern func (Sprite, Float, Float)
+sfSprite_GetX: extern func (Sprite) -> Float
+sfSprite_GetY: extern func (Sprite) -> Float
+sfSprite_GetCenterX: extern func (Sprite) -> Float
+sfSprite_GetCenterY: extern func (Sprite) -> Float
+sfSprite_GetWidth: extern func (Sprite) -> Float
+sfSprite_GetHeight: extern func (Sprite) -> Float

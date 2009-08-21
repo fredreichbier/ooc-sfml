@@ -1,6 +1,6 @@
 include SFML/Window
 
-//use csfml-window
+use csfml-window
 
 VideoMode: cover from sfVideoMode {
 	
