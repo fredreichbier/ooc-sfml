@@ -11,6 +11,7 @@ main: func {
     box := new BouncingBox(win)
 	
     while(win isOpened()) {
+        printf("yay")
         evt: Event
         while(win getEvent(evt&)) {
             if(evt type == EventType closed) {
@@ -21,7 +22,6 @@ main: func {
 		box update()
 		
 		win display()
-		usleep(10_000)
     }
 }
 

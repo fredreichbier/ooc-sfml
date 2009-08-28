@@ -32,7 +32,7 @@ RenderWindow: cover from sfRenderWindow* {
     isOpened: func -> Bool {
         return sfWindow_IsOpened(this as Window)
     }
-    
+
     display: func {
         sfWindow_Display(this as Window)
     }
@@ -121,6 +121,39 @@ Image: cover from sfImage* {
     destroy: func {
         sfImage_Destroy(this)
     }
+
+    saveToFile: func (filename: String) -> Bool {
+        sfImage_SaveToFile(this, filename)
+    }
+
+    createMaskFromColor: func (colorKey: Color, alpha: UInt8) {
+        sfImage_CreateMaskFromColor(this, colorKey, alpha)
+    }
+
+    createMaskFromColor: func ~default_alpha (colorKey: Color) {
+        createMaskFromColor(colorKey, 0)
+    }
+
+    copy: func (source: Image, destX, destY: UInt, sourceRect: IntRect) {
+        /* TODO: should that really take `IntRect`? Shouldn't it take a pointer? */
+        sfImage_Copy(this, source, destX, destY, sourceRect)
+    }
+
+    copyScreen: func (window: RenderWindow, sourceRect: IntRect) -> Bool {
+        sfImage_CopyScreen(this, window, sourceRect)
+    }
+
+    copyScreen: func ~default_rect (window: RenderWindow) -> Bool {
+        copyScreen(window, new IntRect(0, 0, 0, 0))
+    }
+
+    setPixel: func (x, y: UInt, color: Color) {
+        sfImage_SetPixel(this, x, y, color)
+    }
+
+    getPixel: func (x, y: UInt) -> Color {
+        sfImage_GetPixel(this, x, y)
+    }
 }
 
 Sprite: cover from sfSprite* {
@@ -180,6 +213,15 @@ IntRect: cover from sfIntRect {
 	right: extern(Right) Int
 	top: extern(Top) Int
 	bottom: extern(Bottom) Int
+
+    new: func (.left, .right, .top, .bottom) {
+        rect: IntRect
+        rect left = left
+        rect right = right
+        rect top = top
+        rect bottom = bottom
+        rect
+    }
 }
 
 sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
@@ -202,6 +244,12 @@ sfImage_CreateFromPixels: extern func (UInt, UInt, UInt8)
 sfImage_CreateFromFile: extern func (String)
 sfImage_CreateFromMemory: extern func (String, SizeT)
 sfImage_Destroy: extern func (Image)
+sfImage_SaveToFile: extern func (Image, String) -> Bool
+sfImage_CreateMaskFromColor: extern func (Image, Color, IntRect)
+sfImage_Copy: extern func (Image, Image, UInt, UInt, IntRect)
+sfImage_CopyScreen: extern func (Image, RenderWindow, IntRect) -> Bool
+sfImage_SetPixel: extern func (Image, UInt, UInt, Color)
+sfImage_GetPixel: extern func (Image, UInt, UInt) -> Color
 
 sfSprite_Create: extern func ()
 sfSprite_Destroy: extern func (Sprite)
