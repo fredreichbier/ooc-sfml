@@ -102,6 +102,8 @@ Color: cover from sfColor {
 }
 
 Image: cover from sfImage* {
+    /* Image is kind of complete. */
+
     new: func ~from_color (width, height: UInt, color: Color@) {
         sfImage_CreateFromColor(width, height, color)
     }
@@ -154,6 +156,40 @@ Image: cover from sfImage* {
     getPixel: func (x, y: UInt) -> Color {
         sfImage_GetPixel(this, x, y)
     }
+
+    getPixelsPtr: func -> UInt8* {
+        sfImage_GetPixelsPtr(this)
+    }
+
+    bind: func {
+        sfImage_Bind(this)
+    }
+
+    setSmooth: func (smooth: Bool) {
+        sfImage_SetSmooth(this, smooth)
+    }
+
+    getWidth: func -> UInt {
+        sfImage_GetWidth(this)
+    }
+
+    getHeight: func -> UInt {
+        sfImage_GetHeight(this)
+    }
+
+    isSmooth: func -> Bool {
+        sfImage_IsSmooth(this)
+    }
+
+/* CSFML does not have them.
+    getTexCoords: func (rect: IntRect, adjust: Bool) {
+        sfImage_GetTexCoords(this, rect, adjust)
+    }
+
+    getTexCoords: func ~default_adjust (rect: IntRect) {
+        getTexCoords(rect, true)
+    }
+*/
 }
 
 Sprite: cover from sfSprite* {
@@ -224,6 +260,22 @@ IntRect: cover from sfIntRect {
     }
 }
 
+FloatRect: cover from sfFloatRect {
+	left: extern(Left) Float
+	right: extern(Right) Float
+	top: extern(Top) Float
+	bottom: extern(Bottom) Float
+
+    new: func (.left, .right, .top, .bottom) {
+        rect: FloatRect
+        rect left = left
+        rect right = right
+        rect top = top
+        rect bottom = bottom
+        rect
+    }
+}
+
 sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
 sfWindow_IsOpened: extern func (Window)
 sfWindow_Display: extern func (Window)
@@ -250,6 +302,13 @@ sfImage_Copy: extern func (Image, Image, UInt, UInt, IntRect)
 sfImage_CopyScreen: extern func (Image, RenderWindow, IntRect) -> Bool
 sfImage_SetPixel: extern func (Image, UInt, UInt, Color)
 sfImage_GetPixel: extern func (Image, UInt, UInt) -> Color
+sfImage_GetPixelsPtr: extern func (Image) -> UInt8*
+sfImage_Bind: extern func (Image)
+sfImage_SetSmooth: extern func (Image, Bool)
+sfImage_GetWidth: extern func (Image) -> UInt
+sfImage_GetHeight: extern func (Image) -> UInt
+sfImage_IsSmooth: extern func (Image) -> Bool
+//sfImage_GetTexCoords: extern func (Image, IntRect, Bool) -> FloatRect
 
 sfSprite_Create: extern func ()
 sfSprite_Destroy: extern func (Sprite)
