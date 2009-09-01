@@ -42,7 +42,7 @@ RenderWindow: cover from sfRenderWindow* {
     }
 
     getEvent: func (eventReceived: Event*) -> Bool {
-        return sfWindow_GetEvent(this as Window, eventReceived)
+        sfWindow_GetEvent(this as Window, eventReceived)
     }
 
     draw: func ~sprite (sprite: Sprite) {
@@ -89,11 +89,11 @@ Color: cover from sfColor {
     }
 
     add: func (b: Color) -> Color {
-        return sfColor_Add(this, b)
+        sfColor_Add(this, b)
     }
 
     modulate: func (b: Color) -> Color {
-        return sfColor_Modulate(this, b);
+        sfColor_Modulate(this, b);
     }
 	
 	print: func {
@@ -104,19 +104,19 @@ Color: cover from sfColor {
 Image: cover from sfImage* {
     /* Image is kind of complete. */
 
-    new: static func ~from_color (width, height: UInt, color: Color@) {
+    new: static func ~from_color (width, height: UInt, color: Color@) -> Image {
         sfImage_CreateFromColor(width, height, color)
     }
 
-    new: static func ~from_pixels (width, height: UInt, data: UInt8*) {
+    new: static func ~from_pixels (width, height: UInt, data: UInt8*) -> Image { 
         sfImage_CreateFromPixels(width, height, data)
     }
 
-    new: static func ~from_file (filename: String) {
+    new: static func ~from_file (filename: String) -> Image {
         sfImage_CreateFromFile(filename)
     }
 
-    new: static func ~from_memory (data: String, sizeInBytes: SizeT) {
+    new: static func ~from_memory (data: String, sizeInBytes: SizeT) -> Image {
         sfImage_CreateFromMemory(data, sizeInBytes)
     }
 
@@ -146,7 +146,7 @@ Image: cover from sfImage* {
     }
 
     copyScreen: func ~default_rect (window: RenderWindow) -> Bool {
-        copyScreen(window, new IntRect(0, 0, 0, 0))
+        copyScreen(window, IntRect new(0, 0, 0, 0))
     }
 
     setPixel: func (x, y: UInt, color: Color) {
@@ -193,12 +193,12 @@ Image: cover from sfImage* {
 }
 
 Sprite: cover from sfSprite* {
-    new: static func {
+    new: static func -> This {
         sfSprite_Create()
     }
 
-    new: static func ~from_image (image: Image) {
-        this := this()
+    new: static func ~from_image (image: Image) -> This {
+        this := new()
         this setImage(image)
         this
     }
@@ -250,7 +250,7 @@ IntRect: cover from sfIntRect {
 	top: extern(Top) Int
 	bottom: extern(Bottom) Int
 
-    new: static func (.left, .right, .top, .bottom) {
+    new: static func (.left, .right, .top, .bottom) -> This {
         rect: IntRect
         rect left = left
         rect right = right
@@ -276,8 +276,8 @@ FloatRect: cover from sfFloatRect {
     }
 }
 
-sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings)
-sfWindow_IsOpened: extern func (Window)
+sfRenderWindow_Create: extern func (VideoMode, String, UInt, WindowSettings) -> RenderWindow
+sfWindow_IsOpened: extern func (Window) -> Bool
 sfWindow_Display: extern func (Window)
 sfWindow_Destroy: extern func (Window)
 sfWindow_Close: extern func (Window)
@@ -285,16 +285,16 @@ sfRenderWindow_Clear: extern func (Window, Color)
 sfRenderWindow_DrawSprite: extern func (Window, Sprite)
 sfRenderWindow_GetWidth: extern func (Window) -> UInt
 sfRenderWindow_GetHeight: extern func (Window) -> UInt
-sfWindow_GetEvent: extern func (Window, Event)
+sfWindow_GetEvent: extern func (Window, Event) -> Bool
 
-sfColor_Add: extern func (Color, Color)
-sfColor_Modulate: extern func (Color, Color)
-sfColor_fromRGB: extern func (UInt8, UInt8, UInt8)
+sfColor_Add: extern func (Color, Color) -> Color
+sfColor_Modulate: extern func (Color, Color) -> Color
+sfColor_fromRGB: extern func (UInt8, UInt8, UInt8) -> Color
 
-sfImage_CreateFromColor: extern func (UInt, UInt, Color)
-sfImage_CreateFromPixels: extern func (UInt, UInt, UInt8)
-sfImage_CreateFromFile: extern func (String)
-sfImage_CreateFromMemory: extern func (String, SizeT)
+sfImage_CreateFromColor: extern func (UInt, UInt, Color) -> Image
+sfImage_CreateFromPixels: extern func (UInt, UInt, UInt8) -> Image
+sfImage_CreateFromFile: extern func (String) -> Image
+sfImage_CreateFromMemory: extern func (String, SizeT) -> Image
 sfImage_Destroy: extern func (Image)
 sfImage_SaveToFile: extern func (Image, String) -> Bool
 sfImage_CreateMaskFromColor: extern func (Image, Color, IntRect)
@@ -310,7 +310,7 @@ sfImage_GetHeight: extern func (Image) -> UInt
 sfImage_IsSmooth: extern func (Image) -> Bool
 //sfImage_GetTexCoords: extern func (Image, IntRect, Bool) -> FloatRect
 
-sfSprite_Create: extern func ()
+sfSprite_Create: extern func () -> Sprite
 sfSprite_Destroy: extern func (Sprite)
 sfSprite_SetImage: extern func (Sprite, Image)
 sfSprite_GetSubRect: extern func (Sprite) -> IntRect

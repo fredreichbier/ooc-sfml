@@ -17,7 +17,7 @@ VideoMode: cover from sfVideoMode {
     }
 
     new: static func (.width, .height) -> This {
-        this(width, height, 32)
+        This new(width, height, 32)
     }
 
     getDesktopMode: static func -> VideoMode {
@@ -53,7 +53,7 @@ WindowSettings: cover from sfWindowSettings {
     }
 
     new: static func ~default -> This {
-        this(24, 8, 0)
+        This new(24, 8, 0)
     }
 }
 
