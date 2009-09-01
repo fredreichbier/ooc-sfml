@@ -4,11 +4,11 @@ include unistd | (__USE_BSD)
 usleep: extern func(Int)
 
 main: func {
-    mode := new VideoMode(600, 470)
-    win := new RenderWindow(mode, "Hello World!", Style TITLEBAR, new WindowSettings)
-    image := new Image("data/cool_sprite.jpg")
-    sprite := new Sprite(image)
-    box := new BouncingBox(win)
+    mode := VideoMode new(600, 470)
+    win := RenderWindow new(mode, "Hello World!", Style TITLEBAR, WindowSettings new())
+    image := Image new("data/cool_sprite.jpg")
+    sprite := Sprite new(image)
+    box := BouncingBox new(win)
 	
     while(win isOpened()) {
         printf("yay")
@@ -30,14 +30,14 @@ BouncingBox: class {
 	win: RenderWindow
 	velX := 1.5
 	velY := 1.5
-	sprite := new Sprite(new Image("data/cache.png"))
+	sprite := Sprite new(Image new("data/cache.png"))
 	width := sprite getWidth()
 	height := sprite getHeight()
 	//halfWidth := sprite getWidth() / 2
 	//halfHeight := sprite getHeight() / 2
 	halfWidth := 75.0; halfHeight := 75.0
 	
-	new: func(=win) {
+	init: func(=win) {
 		sprite move(-width / 4, -height / 4)
 	}
 	

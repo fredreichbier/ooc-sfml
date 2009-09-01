@@ -8,7 +8,7 @@ VideoMode: cover from sfVideoMode {
 	height: extern(Height) UInt
 	bitsPerPixel: extern(BitsPerPixel) UInt
 	
-    new: func ~with_bpp (.width, .height, .bitsPerPixel) -> This {
+    new: static func ~with_bpp (.width, .height, .bitsPerPixel) -> This {
         mode: VideoMode
         mode width = width
         mode height = height
@@ -16,7 +16,7 @@ VideoMode: cover from sfVideoMode {
         return mode
     }
 
-    new: func (.width, .height) -> This {
+    new: static func (.width, .height) -> This {
         this(width, height, 32)
     }
 
@@ -44,7 +44,7 @@ WindowSettings: cover from sfWindowSettings {
 	stencilBits : extern(StencilBits) ULong
 	antialiasingLevel : extern(AntialiasingLevel) ULong
 	
-    new: func (.depthBits, .stencilBits, .antialiasingLevel) -> This {
+    new: static func (.depthBits, .stencilBits, .antialiasingLevel) -> This {
         settings: WindowSettings
         settings depthBits = depthBits
         settings stencilBits = stencilBits
@@ -52,7 +52,7 @@ WindowSettings: cover from sfWindowSettings {
         settings
     }
 
-    new: func ~default -> This {
+    new: static func ~default -> This {
         this(24, 8, 0)
     }
 }

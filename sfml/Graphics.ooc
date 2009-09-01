@@ -12,7 +12,7 @@ Window: cover from sfWindow*
 
 RenderWindow: cover from sfRenderWindow* {
 	
-    new: func (mode: VideoMode, title: String, style: UInt, params: WindowSettings) -> This {
+    new: static func (mode: VideoMode, title: String, style: UInt, params: WindowSettings) -> This {
         sfRenderWindow_Create(
                     mode,
                     title,
@@ -104,19 +104,19 @@ Color: cover from sfColor {
 Image: cover from sfImage* {
     /* Image is kind of complete. */
 
-    new: func ~from_color (width, height: UInt, color: Color@) {
+    new: static func ~from_color (width, height: UInt, color: Color@) {
         sfImage_CreateFromColor(width, height, color)
     }
 
-    new: func ~from_pixels (width, height: UInt, data: UInt8*) {
+    new: static func ~from_pixels (width, height: UInt, data: UInt8*) {
         sfImage_CreateFromPixels(width, height, data)
     }
 
-    new: func ~from_file (filename: String) {
+    new: static func ~from_file (filename: String) {
         sfImage_CreateFromFile(filename)
     }
 
-    new: func ~from_memory (data: String, sizeInBytes: SizeT) {
+    new: static func ~from_memory (data: String, sizeInBytes: SizeT) {
         sfImage_CreateFromMemory(data, sizeInBytes)
     }
 
@@ -193,11 +193,11 @@ Image: cover from sfImage* {
 }
 
 Sprite: cover from sfSprite* {
-    new: func {
+    new: static func {
         sfSprite_Create()
     }
 
-    new: func ~from_image (image: Image) {
+    new: static func ~from_image (image: Image) {
         this := this()
         this setImage(image)
         this
@@ -250,7 +250,7 @@ IntRect: cover from sfIntRect {
 	top: extern(Top) Int
 	bottom: extern(Bottom) Int
 
-    new: func (.left, .right, .top, .bottom) {
+    new: static func (.left, .right, .top, .bottom) {
         rect: IntRect
         rect left = left
         rect right = right
@@ -266,7 +266,7 @@ FloatRect: cover from sfFloatRect {
 	top: extern(Top) Float
 	bottom: extern(Bottom) Float
 
-    new: func (.left, .right, .top, .bottom) {
+    new: static func (.left, .right, .top, .bottom) {
         rect: FloatRect
         rect left = left
         rect right = right
