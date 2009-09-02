@@ -161,5 +161,5 @@ EventType: class {
     mouseLeft = 12,
     joyButtonPressed = 13,
     joyButtonReleased = 14,
-    joyMoved = 15 : const static Int
+    joyMoved = 15 : static const Int
 }
