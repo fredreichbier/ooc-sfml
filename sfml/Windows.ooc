@@ -2,12 +2,20 @@ include SFML/Window
 
 use csfml-window
 
+UInt32: cover from sfUint32
+UInt8: cover from sfUint8
+WindowHandle: cover from sfWindowHandle
+
 VideoMode: cover from sfVideoMode {
-	
-	width: extern(Width) UInt
+    width: extern(Width) UInt
 	height: extern(Height) UInt
 	bitsPerPixel: extern(BitsPerPixel) UInt
-	
+
+    getDesktopMode: extern(sfVideoMode_GetDesktopMode) static func -> VideoMode
+    getMode: extern(sfVideoMode_GetMode) static func (index: SizeT) -> VideoMode
+    getModesCount: extern(sfVideoMode_GetModesCount) static func -> SizeT
+    isValid: extern(sfVideoMode_IsValid) func -> Bool
+
     new: static func ~with_bpp (.width, .height, .bitsPerPixel) -> This {
         mode: VideoMode
         mode width = width
@@ -19,37 +27,54 @@ VideoMode: cover from sfVideoMode {
     new: static func (.width, .height) -> This {
         This new(width, height, 32)
     }
-
-    getDesktopMode: static func -> VideoMode {
-        return sfVideoMode_GetDesktopMode()
-    }
-
-    getMode: static func (size: SizeT) -> VideoMode {
-        return sfVideoMode_GetMode(size)
-    }
-
-    getModesCount: static func -> SizeT {
-        return sfVideoMode_GetModesCount()
-    }
-	
 }
 
-sfVideoMode_GetModesCount: extern func -> SizeT
-sfVideoMode_GetDesktopMode: extern func -> VideoMode
-sfVideoMode_GetMode: extern func (SizeT) -> VideoMode
+Window: cover from sfWindow* {
+    new: extern(sfWindow_Create) static func (mode: VideoMode, title: Char*, style: ULong, params: WindowSettings) -> Window
+    new: extern(sfWindow_CreateFromHandle) static func ~fromHandle (handle: WindowHandle, params: WindowSettings) -> Window
+    destroy: extern(sfWindow_Destroy) func
+    close: extern(sfWindow_Close) func
+    isOpened: extern(sfWindow_IsOpened) func -> Bool
+    getWidth: extern(sfWindow_GetWidth) func -> UInt
+    getHeight: extern(sfWindow_GetHeight) func -> UInt
+    getSettings: extern(sfWindow_GetSettings) func -> WindowSettings
+    getEvent: extern(sfWindow_GetEvent) func (event: Event*) -> Bool
+    useVerticalSync: extern(sfWindow_UseVerticalSync) func (enabled: Bool)
+    showMouseCursor: extern(sfWindow_ShowMouseCursor) func (show: Bool)
+    setCursorPosition: extern(sfWindow_SetCursorPosition) func (left: UInt, top: UInt)
+    setPosition: extern(sfWindow_SetPosition) func (left: Int, top: Int)
+    setSize: extern(sfWindow_SetSize) func (width: UInt, height: UInt)
+    show: extern(sfWindow_Show) func (state: Bool)
+    enableKeyRepeat: extern(sfWindow_EnableKeyRepeat) func (enabled: Bool)
+    setIcon: extern(sfWindow_SetIcon) func (width: UInt, height: UInt, pixels: UInt8*)
+    setActive: extern(sfWindow_SetActive) func (active: Bool) -> Bool
+    display: extern(sfWindow_Display) func
+    getInput: extern(sfWindow_GetInput) func -> Input
+    setFramerateLimit: extern(sfWindow_SetFramerateLimit) func (limit: UInt)
+    getFrameTime: extern(sfWindow_GetFrameTime) func -> Float
+    setJoystickThreshold: extern(sfWindow_SetJoystickThreshold) func (threshold: Float)
+}
+
+Input: cover from sfInput* {
+    isKeyDown: extern(sfInput_IsKeyDown) func (keyCode: KeyCode) -> Bool
+    isMouseButtonDown: extern(sfInput_IsMouseButtonDown) func (button: MouseButton) -> Bool
+    isJoystickButtonDown: extern(sfInput_IsJoystickButtonDown) func (joyId: UInt, button: UInt) -> Bool
+    getMouseX: extern(sfInput_GetMouseX) func -> Int
+    getMouseY: extern(sfInput_GetMouseY) func -> Int
+    getJoystickAxis: extern(sfInput_GetJoystickAxis) func (joyId: UInt, axis: JoyAxis) -> Float
+}
 
 WindowSettings: cover from sfWindowSettings {
-	
-	depthBits : extern(DepthBits) ULong
-	stencilBits : extern(StencilBits) ULong
-	antialiasingLevel : extern(AntialiasingLevel) ULong
-	
+    depthBits: extern(DepthBits) UInt
+    stencilBits: extern(StencilBits) UInt
+    antialiasingLevel: extern(AntialiasingLevel) UInt
+
     new: static func (.depthBits, .stencilBits, .antialiasingLevel) -> This {
-        settings: WindowSettings
-        settings depthBits = depthBits
-        settings stencilBits = stencilBits
-        settings antialiasingLevel = antialiasingLevel
-        settings
+        this: WindowSettings
+        this depthBits = depthBits
+        this stencilBits = stencilBits
+        this antialiasingLevel = antialiasingLevel
+        this
     }
 
     new: static func ~default -> This {
@@ -114,8 +139,6 @@ SizeEvent: cover from struct sfSizeEvent {
 	width: extern(Width) UInt
 	height: extern(Height) UInt
 }
-
-UInt32: cover from sfUint32
 
 TextEvent: cover from struct sfTextEvent {
     type: extern(Type) Int

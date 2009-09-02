@@ -1,7 +1,4 @@
-import sfml.Graphics
-
-use csfml-graphics
-use csfml-window
+import sfml.[Windows, Graphics]
 
 include unistd | (__USE_BSD)
 usleep: extern func(Int)
