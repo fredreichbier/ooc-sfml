@@ -1,0 +1,7 @@
+= All
+Name: CSFML System 
+Description: Simple and Fast Multimedia Library, C bindings
+Requires: 
+Version: 1.5
+Libs: -lcsfml-system
+#Pkgs: csfml-system

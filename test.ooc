@@ -1,4 +1,4 @@
-import sfml.[Windows, Graphics]
+import sfml.[Windows, Graphics, System]
 
 include unistd | (__USE_BSD)
 usleep: extern func(Int)
@@ -7,8 +7,7 @@ main: func {
     mode := VideoMode getMode(0)
     win := RenderWindow new(mode, "Hello World!", 1, WindowSettings new(24, 8, 0))
 	
-    while(win isOpened()) {
-        printf("yay")
-		win display()
-    }
+    printf("yay")
+    win display()
+    sleep(1.0)
 }

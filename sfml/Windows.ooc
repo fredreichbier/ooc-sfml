@@ -1,9 +1,9 @@
+import sfml.System
+
 include SFML/Window
 
 use csfml-window
 
-UInt32: cover from sfUint32
-UInt8: cover from sfUint8
 WindowHandle: cover from sfWindowHandle
 
 VideoMode: cover from sfVideoMode {
