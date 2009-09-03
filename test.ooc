@@ -1,4 +1,4 @@
-import sfml.[Windows, Graphics, System]
+import sfml.[Windows, Graphics, System, Network]
 
 include unistd | (__USE_BSD)
 usleep: extern func(Int)

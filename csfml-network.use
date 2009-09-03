@@ -1,0 +1,9 @@
+#Here's a comment
+
+= All
+Name: CSFML Network
+Description: Simple and Fast Multimedia Library, C bindings
+Requires: 
+Version: 1.5
+Libs: -lcsfml-network
+#Pkgs: csfml-graphics
