@@ -1,4 +1,4 @@
-import sfml.Windows
+import sfml/Windows
 
 include SFML/Graphics
 include SFML/Graphics/Glyph
@@ -18,13 +18,6 @@ IntRect: cover from sfIntRect {
 //    offset: extern(IntRect_Offset) func (offsetX: Int, offsetY: Int)
 //    contains: extern(IntRect_Contains) func (x: Int, y: Int) -> Bool
 //    intersects: extern(IntRect_Intersects) func (rect2: IntRect, overlappingRect: IntRect) -> Bool
-}
-
-Clock: cover from sfClock* {
-    new: extern(sfClock_Create) static func -> Clock
-    destroy: extern(sfClock_Destroy) func
-    getTime: extern(sfClock_GetTime) func -> Float
-    reset: extern(sfClock_Reset) func
 }
 
 Color: cover from sfColor {
