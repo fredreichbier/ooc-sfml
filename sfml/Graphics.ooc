@@ -17,12 +17,20 @@ Style: class {
 }
 
 FloatRect: cover from sfFloatRect {
+    left: extern(Left) Float
+    right: extern(Right) Float
+    top: extern(Top) Float
+    bottom: extern(Bottom) Float
 //    offset: extern(sfFloatRect_Offset) func (offsetX: Float, offsetY: Float)
 //    contains: extern(sfFloatRect_Contains) func (x: Float, y: Float) -> Bool
 //    intersects: extern(sfFloatRect_Intersects) func (rect2: FloatRect, overlappingRect: FloatRect) -> Bool
 }
 
 IntRect: cover from sfIntRect {
+    left: extern(Left) Int
+    right: extern(Right) Int
+    top: extern(Top) Int
+    bottom: extern(Bottom) Int
 //    offset: extern(IntRect_Offset) func (offsetX: Int, offsetY: Int)
 //    contains: extern(IntRect_Contains) func (x: Int, y: Int) -> Bool
 //    intersects: extern(IntRect_Intersects) func (rect2: IntRect, overlappingRect: IntRect) -> Bool
