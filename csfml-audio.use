@@ -7,3 +7,4 @@ Requires:
 Version: 1.5
 Libs: -lcsfml-audio
 #Pkgs: csfml-graphics
+SourcePath: .
