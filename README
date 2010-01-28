@@ -6,6 +6,6 @@ http://www.sfml-dev.org/
 You need:
   - SFML 1.5 (yes, the C++ version)
   - CSFML 1.5 (yes, the C wrapper)
-  - ooc git: http://github.com/amoswenger/ooc
+  - ooc git: http://github.com/nddrylliog/ooc
 
 Enjoy =)

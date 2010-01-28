@@ -1,4 +1,4 @@
-import sfml.System
+import sfml/System
 
 include SFML/Network
 use csfml-network

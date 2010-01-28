@@ -1,4 +1,4 @@
-import sfml.System
+import sfml/System
 
 include SFML/Window
 
@@ -8,8 +8,8 @@ WindowHandle: cover from sfWindowHandle
 
 VideoMode: cover from sfVideoMode {
     width: extern(Width) UInt
-	height: extern(Height) UInt
-	bitsPerPixel: extern(BitsPerPixel) UInt
+    height: extern(Height) UInt
+    bitsPerPixel: extern(BitsPerPixel) UInt
 
     getDesktopMode: extern(sfVideoMode_GetDesktopMode) static func -> VideoMode
     getMode: extern(sfVideoMode_GetMode) static func (index: SizeT) -> VideoMode
@@ -88,8 +88,8 @@ Event: cover from sfEvent {
 
 JoyButtonEvent: cover from struct sfJoyButtonEvent {
     type: extern(Type) Int
-	joystickId: extern(JoystickId) UInt
-	button: extern(Button) UInt
+    joystickId: extern(JoystickId) UInt
+    button: extern(Button) UInt
 }
 
 JoyAxis: cover from sfJoyAxis
@@ -97,9 +97,9 @@ JoyAxis: cover from sfJoyAxis
 
 JoyMoveEvent: cover from struct sfJoyMoveEvent {
     type: extern(Type) Int
-	joystickId: extern(JoystickId) UInt
-	axis: extern(Axis) JoyAxis
-	position: extern(Position) Float
+    joystickId: extern(JoystickId) UInt
+    axis: extern(Axis) JoyAxis
+    position: extern(Position) Float
 }
 
 KeyCode: cover from sfKeyCode
@@ -108,9 +108,9 @@ KeyCode: cover from sfKeyCode
 KeyEvent: cover from struct sfKeyEvent {
     type: extern(Type) Int
     code: extern(Code) KeyCode
-	alt: extern(Alt) Bool
-	control: extern(Control) Bool
-	shift: extern(Shift) Bool
+    alt: extern(Alt) Bool
+    control: extern(Control) Bool
+    shift: extern(Shift) Bool
 }
 
 MouseButton: cover from sfMouseButton
@@ -120,13 +120,13 @@ MouseButtonEvent: cover from struct sfMouseButtonEvent {
     type: extern(Type) Int
     button: extern(Button) MouseButton
     x: extern(X) Int
-	y: extern(Y) Int
+    y: extern(Y) Int
 }
 
 MouseMoveEvent: cover from struct sfMouseMoveEvent {
     type: extern(Type) Int
-	x: extern(X) Int
-	y: extern(Y) Int
+    x: extern(X) Int
+    y: extern(Y) Int
 }
 
 MouseWheelEvent: cover from struct sfMouseWheelEvent {
@@ -136,8 +136,8 @@ MouseWheelEvent: cover from struct sfMouseWheelEvent {
 
 SizeEvent: cover from struct sfSizeEvent {
     type: extern(Type) Int
-	width: extern(Width) UInt
-	height: extern(Height) UInt
+    width: extern(Width) UInt
+    height: extern(Height) UInt
 }
 
 TextEvent: cover from struct sfTextEvent {
@@ -148,15 +148,15 @@ TextEvent: cover from struct sfTextEvent {
 EventType: class {
     closed = 0,
     resized = 1,
-	lostFocus = 2,
-	gainedFocus = 3,
-	textEntered = 4,
+    lostFocus = 2,
+    gainedFocus = 3,
+    textEntered = 4,
     keyPressed = 5,
-	keyReleased = 6,
+    keyReleased = 6,
     mouseWheelMoved = 7,
-	mouseButtonPressed = 8,
+    mouseButtonPressed = 8,
     mouseButtonReleased = 9,
-	mouseMoved = 10,
+    mouseMoved = 10,
     mouseEntered = 11,
     mouseLeft = 12,
     joyButtonPressed = 13,
