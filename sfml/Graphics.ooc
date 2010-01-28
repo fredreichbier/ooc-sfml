@@ -8,6 +8,14 @@ use csfml-graphics
 
 sfBlendMode: extern cover
 
+Style: class {
+    NONE: static const UInt = 0
+    TITLEBAR: static const UInt = 1
+    RESIZE: static const UInt = 2
+    CLOSE: static const UInt = 4
+    FULLSCREEN: static const UInt = 8
+}
+
 FloatRect: cover from sfFloatRect {
 //    offset: extern(sfFloatRect_Offset) func (offsetX: Float, offsetY: Float)
 //    contains: extern(sfFloatRect_Contains) func (x: Float, y: Float) -> Bool
