@@ -34,6 +34,15 @@ IntRect: cover from sfIntRect {
 //    offset: extern(IntRect_Offset) func (offsetX: Int, offsetY: Int)
 //    contains: extern(IntRect_Contains) func (x: Int, y: Int) -> Bool
 //    intersects: extern(IntRect_Intersects) func (rect2: IntRect, overlappingRect: IntRect) -> Bool
+
+    new : static func (.left, .top, .right, .bottom) -> This {
+        this: IntRect
+        this left = left
+        this top = top
+        this right = right
+        this bottom = bottom
+        this
+    }
 }
 
 Color: cover from sfColor {
@@ -115,12 +124,20 @@ RenderWindow: cover from sfRenderWindow* {
     drawShape: extern(sfRenderWindow_DrawShape) func (shape: Shape)
     drawString: extern(sfRenderWindow_DrawString) func (string: String)
     capture: extern(sfRenderWindow_Capture) func -> Image
-    clear: extern(sfRenderWindow_Clear) func (color: Color)
+    clear: extern(sfRenderWindow_Clear) func ~withColor (color: Color)
+    clear: func ~defaultColor() {
+        this clear(Color new(0, 0, 0))
+    }
     setView: extern(sfRenderWindow_SetView) func (view: View)
     getView: extern(sfRenderWindow_GetView) func -> View
     getDefaultView: extern(sfRenderWindow_GetDefaultView) func -> View
     convertCoords: extern(sfRenderWindow_ConvertCoords) func (windowX: UInt, windowY: UInt, viewX: Float*, viewY: Float*, targetView: View)
     preserveOpenGLStates: extern(sfRenderWindow_PreserveOpenGLStates) func (preserve: Bool)
+
+    draw: extern(sfRenderWindow_DrawPostFX) func ~postfx (postFX: PostFX)
+    draw: extern(sfRenderWindow_DrawSprite) func ~sprite (sprite: Sprite)
+    draw: extern(sfRenderWindow_DrawShape) func ~shape (shape: Shape)
+    draw: extern(sfRenderWindow_DrawString) func ~string (string: String)
 }
 
 Shape: cover from sfShape* {

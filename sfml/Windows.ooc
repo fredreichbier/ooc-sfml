@@ -84,6 +84,15 @@ WindowSettings: cover from sfWindowSettings {
 
 Event: cover from sfEvent {
     type: extern(Type) Int
+
+    keyEvent: extern(Key) KeyEvent
+    textEvent: extern(Text) TextEvent
+    mouseMoveEvent: extern(MouseMove) MouseMoveEvent
+    mouseButtonEvent: extern(MouseButton) MouseButtonEvent
+    mouseWheelEvent: extern(MouseWheel) MouseWheelEvent
+    joyMoveEvent: extern(JoyMove) JoyMoveEvent
+    joyButtonEvent: extern(JoyButton) JoyButtonEvent
+    sizeEvent: extern(Size) SizeEvent
 }
 
 JoyButtonEvent: cover from struct sfJoyButtonEvent {
@@ -102,8 +111,100 @@ JoyMoveEvent: cover from struct sfJoyMoveEvent {
     position: extern(Position) Float
 }
 
-KeyCode: cover from sfKeyCode
-/* TODO */
+KeyCode: cover from sfKeyCode {
+    A: extern(sfKeyA) Char
+    B: extern(sfKeyB) static Char
+    C: extern(sfKeyC) static Char
+    D: extern(sfKeyD) static Char
+    E: extern(sfKeyE) static Char
+    F: extern(sfKeyF) static Char
+    G: extern(sfKeyG) static Char
+    H: extern(sfKeyH) static Char
+    I: extern(sfKeyI) static Char
+    J: extern(sfKeyJ) static Char
+    K: extern(sfKeyK) static Char
+    L: extern(sfKeyL) static Char
+    M: extern(sfKeyM) static Char
+    N: extern(sfKeyN) static Char
+    O: extern(sfKeyO) static Char
+    P: extern(sfKeyP) static Char
+    Q: extern(sfKeyQ) static Char
+    R: extern(sfKeyR) static Char
+    S: extern(sfKeyS) static Char
+    T: extern(sfKeyT) static Char
+    U: extern(sfKeyU) static Char
+    V: extern(sfKeyV) static Char
+    W: extern(sfKeyW) static Char
+    X: extern(sfKeyX) static Char
+    Y: extern(sfKeyY) static Char
+    Z: extern(sfKeyZ) static Char
+    
+    Escape: extern(sfKeyEscape) static Char
+    LControl: extern(sfKeyLControl) static Char
+    LShift: extern(sfKeyLShift) static Char
+    LAlt: extern(sfKeyLAlt) static Char
+    LSystem: extern(sfKeyLSystem) static Char
+    RControl: extern(sfKeyRControl) static Char
+    RShift: extern(sfKeyRShift) static Char
+    RAlt: extern(sfKeyRAlt) static Char
+    RSystem: extern(sfKeyRSystem) static Char
+    Menu: extern(sfKeyMenu) static Char
+    LBracket: extern(sfKeyLBracket) static Char
+    RBracket: extern(sfKeyRBracket) static Char
+    SemiColon: extern(sfKeySemiColon) static Char
+    Comma: extern(sfKeyComma) static Char
+    Period: extern(sfKeyPeriod) static Char
+    Quote: extern(sfKeyQuote) static Char
+    Slash: extern(sfKeySlash) static Char
+    BackSlash: extern(sfKeyBackSlash) static Char
+    Tilde: extern(sfKeyTilde) static Char
+    Equal: extern(sfKeyEqual) static Char
+    Dash: extern(sfKeyDash) static Char
+    Space: extern(sfKeySpace) static Char
+    Return: extern(sfKeyReturn) static Char
+    Back: extern(sfKeyBack) static Char
+    Tab: extern(sfKeyTab) static Char
+    PageUp: extern(sfKeyPageUp) static Char
+    PageDown: extern(sfKeyPageDown) static Char
+    End: extern(sfKeyEnd) static Char
+    Home: extern(sfKeyHome) static Char
+    Insert: extern(sfKeyInsert) static Char
+    Delete: extern(sfKeyDelete) static Char
+    Add: extern(sfKeyAdd) static Char
+    Subtract: extern(sfKeySubtract) static Char
+    Multiply: extern(sfKeyMultiply) static Char
+    Divide: extern(sfKeyDivide) static Char
+    Left: extern(sfKeyLeft) static Char
+    Right: extern(sfKeyRight) static Char
+    Up: extern(sfKeyUp) static Char
+    Down: extern(sfKeyDown) static Char
+    Numpad0: extern(sfKeyNumpad0) static Char
+    Numpad1: extern(sfKeyNumpad1) static Char
+    Numpad2: extern(sfKeyNumpad2) static Char
+    Numpad3: extern(sfKeyNumpad3) static Char
+    Numpad4: extern(sfKeyNumpad4) static Char
+    Numpad5: extern(sfKeyNumpad5) static Char
+    Numpad6: extern(sfKeyNumpad6) static Char
+    Numpad7: extern(sfKeyNumpad7) static Char
+    Numpad8: extern(sfKeyNumpad8) static Char
+    Numpad9: extern(sfKeyNumpad9) static Char
+    F1: extern(sfKeyF1) static Char
+    F2: extern(sfKeyF2) static Char
+    F3: extern(sfKeyF3) static Char
+    F4: extern(sfKeyF4) static Char
+    F5: extern(sfKeyF5) static Char
+    F6: extern(sfKeyF6) static Char
+    F7: extern(sfKeyF7) static Char
+    F8: extern(sfKeyF8) static Char
+    F9: extern(sfKeyF9) static Char
+    F10: extern(sfKeyF10) static Char
+    F11: extern(sfKeyF11) static Char
+    F12: extern(sfKeyF12) static Char
+    F13: extern(sfKeyF13) static Char
+    F14: extern(sfKeyF14) static Char
+    F15: extern(sfKeyF15) static Char
+    Pause: extern(sfKeyPause) static Char
+}
 
 KeyEvent: cover from struct sfKeyEvent {
     type: extern(Type) Int
